@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * FXPulse design tokens — "Graphite & Gold Terminal".
+ * Color is semantic: ink neutrals for structure, gold (--brand) as the single
+ * interaction/brand signal, and green/red (--up/--down) reserved for live
+ * market data only. Tailwind maps each to `rgb(var(--x) / <alpha>)`, so every
+ * value is space-separated RGB channels. Light is the default; `.dark` flips.
+ * Fonts (--font-sans / --font-mono) are owned by next/font; usages carry a
+ * fallback stack so type never collapses to a browser default if it's unset.
+ */
+:root {
+  --bg: 250 250 249;
+  --surface: 255 255 255;
+  --surface-2: 245 245 243;
+  --border: 228 228 223;
+  --fg: 24 24 27;
+  --muted: 112 113 122;
+  --brand: 176 120 8;
+  --brand-fg: 26 22 6;
+  --up: 4 120 87;
+  --down: 190 27 43;
+
+  /* Focus ring is a deepened gold for legibility on light surfaces. */
+  --ring: 161 105 10;
+}
+
+.dark {
+  --bg: 15 16 19;
+  --surface: 22 23 28;
+  --surface-2: 30 32 39;
+  --border: 43 46 55;
+  --fg: 240 240 242;
+  --muted: 154 157 167;
+  --brand: 245 199 72;
+  --brand-fg: 26 22 6;
+  --up: 60 205 140;
+  --down: 248 113 113;
+
+  --ring: 245 199 72;
+}
+
+@layer base {
+  * {
+    border-color: rgb(var(--border));
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-color: rgb(var(--border)) transparent;
+  }
+
+  body {
+    background-color: rgb(var(--bg));
+    color: rgb(var(--fg));
+    font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Real numeric data rides tabular figures for column-true alignment. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
+  ::selection {
+    background-color: rgb(var(--brand) / 0.24);
+    color: rgb(var(--fg));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--ring));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--border));
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(var(--muted) / 0.5);
+  }
+}
+
+@layer utilities {
+  /* Bespoke elevation for the converter panel; quieter than a card kit. */
+  .shadow-panel {
+    box-shadow:
+      0 1px 2px rgb(0 0 0 / 0.04),
+      0 12px 32px -12px rgb(0 0 0 / 0.12);
+  }
+  .dark .shadow-panel {
+    box-shadow:
+      0 1px 2px rgb(0 0 0 / 0.4),
+      0 16px 40px -12px rgb(0 0 0 / 0.5);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Signature tape motion: changed digits flash market-green/red, then fade. */
+  .tick-up {
+    animation: tick-up 0.7s ease-out;
+  }
+  .tick-down {
+    animation: tick-down 0.7s ease-out;
+  }
+}
+
+@keyframes tick-up {
+  from {
+    background-color: rgb(var(--up) / 0.22);
+    color: rgb(var(--up));
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes tick-down {
+  from {
+    background-color: rgb(var(--down) / 0.22);
+    color: rgb(var(--down));
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+/* Live-status heartbeat; held still for reduced-motion (see below). */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.82);
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
