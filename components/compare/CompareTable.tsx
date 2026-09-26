@@ -221,7 +221,7 @@ export function CompareTable() {
                   </div>
 
                   {/* Numbers */}
-                  <div className="ml-auto flex items-center gap-4">
+                  <div className="ml-auto flex items-center gap-2 sm:gap-4">
                     <div className="min-w-[6.5rem] text-right">
                       {converted != null ? (
                         <div className="font-mono text-lg font-medium tabular text-fg">
@@ -246,7 +246,7 @@ export function CompareTable() {
                       values={values}
                       stroke={dirColor}
                       fill={dirColor}
-                      className="h-8 w-20 flex-none sm:w-28"
+                      className="hidden h-8 flex-none sm:block sm:w-28"
                       ariaLabel={
                         pct != null
                           ? `${baseSym} to ${tgtSym} trend over ${range}`
@@ -254,7 +254,7 @@ export function CompareTable() {
                       }
                     />
 
-                    <div className="w-20 text-right">
+                    <div className="text-right">
                       <DeltaChip change={pct} windowLabel={range} size="sm" />
                     </div>
 

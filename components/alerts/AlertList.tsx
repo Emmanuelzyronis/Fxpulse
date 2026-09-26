@@ -175,7 +175,7 @@ export function AlertList() {
                   title={
                     alert.triggeredAt ? formatDateTime(alert.triggeredAt) : undefined
                   }
-                  className="hidden flex-none items-center gap-1.5 rounded-full border border-brand/40 bg-brand/10 px-2 py-0.5 text-xs font-medium text-brand sm:inline-flex"
+                  className="inline-flex flex-none items-center gap-1.5 rounded-full border border-brand/40 bg-brand/10 px-2 py-0.5 text-xs font-medium text-brand"
                 >
                   Triggered
                   {alert.triggeredAt && (
@@ -185,7 +185,7 @@ export function AlertList() {
                   )}
                 </time>
               ) : (
-                <span className="hidden flex-none items-center gap-1.5 rounded-full border border-border px-2 py-0.5 text-xs text-muted sm:inline-flex">
+                <span className="inline-flex flex-none items-center gap-1.5 rounded-full border border-border px-2 py-0.5 text-xs text-muted">
                   <span className="h-1.5 w-1.5 rounded-full bg-up" aria-hidden="true" />
                   Watching
                 </span>

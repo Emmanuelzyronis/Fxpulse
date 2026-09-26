@@ -268,7 +268,8 @@ export function AlertForm() {
 
       <button
         type="submit"
-        className="w-full rounded-lg bg-fg px-3 py-2.5 text-sm font-semibold text-bg transition-opacity hover:opacity-90"
+        disabled={from === to || !targetValid}
+        className="w-full rounded-lg bg-fg px-3 py-2.5 text-sm font-semibold text-bg transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
       >
         Set alert
       </button>

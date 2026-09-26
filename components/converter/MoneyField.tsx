@@ -22,6 +22,8 @@ interface MoneyFieldProps {
   /** Formatted text for read-only fields. */
   display?: string;
   autoFocus?: boolean;
+  /** Highlight the field border in error red when the value is not a valid number. */
+  isInvalid?: boolean;
 }
 
 /**
@@ -42,11 +44,15 @@ export function MoneyField({
   onCommit,
   display,
   autoFocus,
+  isInvalid = false,
 }: MoneyFieldProps) {
   const inputId = useId();
 
   return (
-    <div className="rounded-2xl border border-border bg-surface p-3 shadow-panel sm:p-4">
+    <div className={cn(
+      "rounded-2xl border bg-surface p-3 shadow-panel sm:p-4 transition-colors",
+      isInvalid ? "border-down/60" : "border-border",
+    )}>
       <label
         htmlFor={readOnly ? undefined : inputId}
         className="block text-xs font-medium text-muted"
@@ -85,6 +91,7 @@ export function MoneyField({
               }
             }}
             placeholder="0"
+            aria-invalid={isInvalid || undefined}
             className="min-w-0 flex-1 bg-transparent font-mono text-2xl font-medium tabular text-fg outline-none placeholder:text-muted/60 sm:text-3xl"
           />
         )}

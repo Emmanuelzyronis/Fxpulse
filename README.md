@@ -6,6 +6,33 @@ Built with Next.js 16 (App Router), React 19, and TypeScript. State lives in you
 
 ---
 
+## Demo
+
+> Interactive terminal demo — [view the full case study](https://emmanuelzyronis.vercel.app/work/fxpulse)
+
+```text
+$ npx fxpulse convert 1000 USD
+
+FXPulse — live rates  2026-09-25 09:30:01 UTC
+
+  1,000 USD →
+
+  Fiat                           Crypto
+  ────────────────────────────   ─────────────────────────────
+  EUR    922.40     (-0.3% 24h)  BTC  0.01482    (+2.1% 24h)
+  GBP    792.80     (+0.1% 24h)  ETH  0.40210    (+1.8% 24h)
+  NGN  1,621,000    (+0.8% 24h)  SOL  5.88200    (+3.4% 24h)
+  JPY    148,200    (-0.2% 24h)
+                                 Precious Metals
+                                 ─────────────────────────────
+                                 XAU  0.3812 oz  (-0.1% 24h)
+                                 XAG  33.14  oz  (+0.2% 24h)
+
+  Rate alert set: EUR/USD below 0.91 → browser notification armed
+```
+
+---
+
 ## Features
 
 - **Unified conversion** — fiat ↔ crypto ↔ metal through one USD-hub formula. USD/EUR, BTC/JPY, and XAU/GBP all work the same way.

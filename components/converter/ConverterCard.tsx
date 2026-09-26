@@ -63,6 +63,7 @@ export function ConverterCard() {
 
   const amountNum = parseAmount(amount);
   const validAmount = Number.isFinite(amountNum);
+  const amountInvalid = amount !== "" && !validAmount;
   const conv = useConversion(from, to, validAmount ? amountNum : 0);
 
   const resultText =
@@ -117,6 +118,7 @@ export function ConverterCard() {
           value={amount}
           onValueChange={setAmount}
           onCommit={() => commit(false)}
+          isInvalid={amountInvalid}
           autoFocus
         />
 
@@ -146,7 +148,13 @@ export function ConverterCard() {
         />
       </div>
 
-      {!canConvert && (
+      {amountInvalid && (
+        <p className="text-center text-sm text-down">
+          Enter a valid number to convert.
+        </p>
+      )}
+
+      {!amountInvalid && !canConvert && (
         <p className="text-center text-sm text-muted">
           Pick two different assets to see a rate.
         </p>
